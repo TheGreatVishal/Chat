@@ -1,13 +1,13 @@
 .signup{
     margin : 10%;
     background: black;
-    opacity: 0.5;
+    /* opacity: 0.5; */
 
 }
 
 .form-row{
     margin:10%;
-    margin-top: 10%;
+    margin-top: 20%;
     /* opacity: ; */
     /* color: yellow; */
 }
