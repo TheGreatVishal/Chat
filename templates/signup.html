@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign-Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+{% comment %}
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@300&display=swap');
+    </style> {% endcomment %}
 
     <style>
       body {
-        font-family: BankGothic Lt BT;
+        font-family : BankGothic Lt BT;
         background-color: aqua;
-        background-size: 100%;
-        background-repeat: no-repeat;
       }
-      
+
       .signup {
         width: 50%;
         background: black;
@@ -31,16 +33,22 @@
         left: 42%;
         width: 7rem;
       }
-      
       .submit {
         color: white;
         position: relative;
         left: 42%;
       }
-      
+
       .signup_button {
         background-color: cyan;
         width: 8rem;
+        border-radius: 10px;
+      }
+
+      .alert {
+        position: absolute;
+        top: 54%;
+        left: 42%;
       }
     </style>
 
@@ -52,6 +60,7 @@
           position: relative;
           left: 4%;
           top: 10%;
+          padding: 3px;
         }
         .form-control {
           font-size: small;
@@ -64,8 +73,26 @@
           position: relative;
           left: 36%;
         }
+        .alert {
+          position: absolute;
+          top: 38%;
+          left: 0;
+          width: 100%;
+        }
       }
     </style>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var inputElement = document.getElementById('username')
+
+        // Add an input event listener
+        inputElement.addEventListener('input', function () {
+          this.value = this.value.toLowerCase()
+        })
+      })
+    </script>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -89,10 +116,10 @@
         </div>
       </div>
     </nav>
-
+    <br />
     {% comment %}sign-up form{% endcomment %}
     <form action="signup" method="post">
-        {% csrf_token %}
+      {% csrf_token %}
       <div class="signup">
         <div class="row form-row">
           <div class="signup-heading">
@@ -100,25 +127,25 @@
           </div>
 
           <div class="col">
-            <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="first_name" />
+            <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="first_name" autocomplete="off" />
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="last_name" />
-          </div>
-        </div>
-
-        <div class="row form-row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" />
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="last_name"autocomplete="off" />
           </div>
         </div>
 
         <div class="row form-row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Password" aria-label="Password" name="password1" />
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" id = "username" autocomplete="off"/>
+          </div>
+        </div>
+
+        <div class="row form-row">
+          <div class="col">
+            <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password1" autocomplete="off" />
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Confirm-Password" aria-label="Confirm-Password" name="password2" />
+            <input type="password" class="form-control" placeholder="Confirm-Password" aria-label="Confirm-Password" name="password2" autocomplete="off" />
           </div>
         </div>
         <div class="submit">
@@ -126,5 +153,10 @@
         </div>
       </div>
     </form>
+    <div>
+      {% for msg in messages %}
+      <div class="alert alert-info" role="alert" style="text-align: center;">{{ msg }}</div>
+      {% endfor %}
+    </div>
   </body>
 </html>
