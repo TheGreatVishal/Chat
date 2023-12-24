@@ -9,5 +9,7 @@ urlpatterns = [
     path("accept/<str:source_user>", views.accept, name = "accept"),
     path("reject/<str:source_user>", views.reject, name = "reject"),    
     path("remove/<str:target>", views.remove, name = "remove"),
-     path("get_users", views.get_users, name = "get_users"),
+    path("get_users", views.get_users, name = "get_users"),
+    path("show_members", views.show_members, name="show_members"),
+    path("add_from_member/<str:target>", views.add_from_member, name = "add_from_member"),
 ]

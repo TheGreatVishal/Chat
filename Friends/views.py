@@ -168,3 +168,68 @@ def remove(request, target):
 
     database.close()
     return redirect("friend")
+
+def show_members(request):
+    
+    db = fl.Database()
+
+    all_user_list = []
+    all_user_list = db.all_users()
+    db.close()
+    total = len(all_user_list)
+    return render(request,"members.html",{"users" : all_user_list, "total" : total})
+
+def add_from_member(request, target):
+    
+    db = fl.Database()
+    
+    # username = request.POST["username"]  # username of person to whom we are sending request
+    username = target
+    
+    try : 
+        db.create_table_of_friends(username)
+    except:
+        pass
+    
+    try : 
+        db.create_table_of_requests(username)
+    except:
+        pass
+    
+    if(db.if_username_exists(username)):
+        
+        if(username == str(request.user)):
+            
+            messages.info(request, "Can't send request to Yourself!")
+            db.close()
+            return redirect("/Friends/show_members")
+        
+        elif(db.if_request_already_sent(str(request.user), username)):
+            
+            messages.info(request, "Friend request already sent!")
+            db.close()
+            # return redirect("members")
+            return redirect("/Friends/show_members")
+        
+        elif(db.if_already_friends(str(request.user), username)):
+            
+            messages.info(request, "You are already friends!")
+            db.close()
+            # return redirect("members")
+            return redirect("/Friends/show_members")
+        
+        elif(db.if_friend_request_exist(str(request.user), username)):
+            
+            messages.info(request, "You already have Friend Request from this person !")
+            db.close()
+            # return redirect("members")
+            return redirect("/Friends/show_members")
+        
+        else:
+            
+            db.send_friend_request(str(request.user), username)
+            messages.info(request, "Request sent!")
+            db.close()
+            # return redirect("members")
+            return redirect("/Friends/show_members")
+        

@@ -16,16 +16,16 @@
 
     <script>
       $(document).ready(function () {
-         var isScrollingToBottom = true
-
+        var isScrollingToBottom = true
+      
         function handleScroll() {
           var objDiv = document.getElementById('message_div')
-
+      
           // Calculate how close the user is to the bottom of the chat box
           var isAtBottom = Math.abs(objDiv.scrollHeight - objDiv.scrollTop - objDiv.clientHeight) < 100
-
+      
           console.log('isAtBottom:', isAtBottom)
-
+      
           // If the user is at the bottom, enable automatic scrolling
           if (isAtBottom) {
             isScrollingToBottom = true
@@ -34,21 +34,21 @@
             isScrollingToBottom = false
           }
         }
-
+      
         setInterval(function () {
           $.ajax({
             type: 'GET',
             url: 'get_messages',
             success: function (response) {
               $('#message_div').empty()
-
+      
               for (var index in response.messages) {
                 var temp = response.messages[index] + '<br>'
                 $('#message_div').append(temp)
               }
-
-             handleScroll()
-
+      
+              handleScroll()
+      
               if (isScrollingToBottom) {
                 scroll_down()
               }
@@ -160,12 +160,15 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/Friends/show_members">Members</a>
+            </li>
             {% if user.is_authenticated %}
-             {% if user.is_staff %}
-              <li class="nav-item">
-                <a class="nav-link" href="/Chat/reset_chat">Reset Chat</a>
-              </li>
-            {% endif%}
+              {% if user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/Chat/reset_chat">Reset Chat</a>
+                </li>
+              {% endif %}
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="/Friends/friend">Friends</a>
