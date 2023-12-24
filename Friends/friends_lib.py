@@ -172,6 +172,19 @@ class Database:
         else:
             return False
 
+
+# to get all users on website
+    def all_users(self):
+        
+        self.crs.execute("select username from auth_user ;")
+        all_users = []
+        
+        for user in self.crs:
+            all_users.append(user[0])
+        
+        return all_users
+
+
 # closing connection
     def close(self):
         self.hdl.close()
@@ -179,7 +192,6 @@ class Database:
 def main():
 
     database = Database()
-    
 
 if(__name__ == "__main__"):
     main()

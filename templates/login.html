@@ -9,60 +9,91 @@
     <style>
       body {
         font-family: BankGothic Lt BT;
-        background-color: aqua;
-        background-size: 100%;
-        background-repeat: no-repeat;
+        background-color: #dcf5fe;
       }
-
+      
       .login {
-        width: 50%;
+        width: 35%;
         background: black;
-        position: absolute;
-        left: 25%;
-        top: 10%;
+        margin: auto;
+        position: relative;
+        top: 2vw;
         padding: 10px;
       }
       .form-row {
         margin: 5%;
         margin-top: 2%;
       }
+      .login_heading {
+        margin: auto;
+      }
       .login_text {
         color: white;
         position: relative;
-        left: 42%;
+        left: 40%;
         width: 7rem;
       }
-
+      
       .submit {
         color: white;
       }
-
+      
       .login_button {
-        background-color: cyan;
-        width: 8rem;
+        background-color: #dcf5fe;
+        width: 28rem;
         margin: auto;
         position: relative;
-        left: 37%;
+        left: 35px;
         border-radius: 10px;
         font-size: 1.3rem;
       }
-
+      
       .alert {
         position: absolute;
-        top: 50%;
-        left: 42%;
+        top: 55.5%;
+        left: 44%;
       }
+      .signup {
+        background: cadetblue;
+        text-align: center;
+        font-size: 1.4rem;
+        width: 77%;
+        margin: auto;
+      }
+      
+      .signup:hover {
+        text-decoration: underline;
+      }
+
+      .separator-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .separator-line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: #000; 
+        margin: 0 10px; 
+    }
+
+    .or-text {
+        font-size: 2vw; 
+        color: #777; 
+    }
     </style>
 
     <style>
       @media (max-width: 480px) {
         .login {
-          width: 92%;
+          width: 100%;
           background: black;
           position: relative;
-          left: 4%;
-          top: 10%;
-          padding: 3px;
+          left: 0%;
+          top: 0%;
+          height: 18rem;
+          padding: 5px;
         }
         .form-control {
           font-size: small;
@@ -70,27 +101,38 @@
         .login_button {
           margin: auto;
           position: relative;
-          left: 33%;
+          left: 8%;
+          width: 84%;
           border-radius: 10px;
         }
         .login_text {
           position: relative;
           left: 38%;
         }
-
+        .signup {
+          background: cadetblue;
+          text-align: center;
+          font-size: 1.4rem;
+          width: 77%;
+          margin: auto;
+        }
         .alert {
           position: absolute;
           top: 73vw;
           left: 0%;
           width: 100%;
         }
+        .or-text {
+          font-size: 5vw; 
+          color: #777; 
+      }
       }
     </style>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var inputElement = document.getElementById('username')
-
+      
         // Add an input event listener
         inputElement.addEventListener('input', function () {
           this.value = this.value.toLowerCase()
@@ -105,7 +147,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Website</a>
+        <a class="navbar-brand" href="#">Login</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -122,7 +164,7 @@
         </div>
       </div>
     </nav>
-    <br />
+
     <form action="login" method="post">
       {% csrf_token %}
       <div class="login">
@@ -134,7 +176,7 @@
 
         <div class="row form-row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" id = "username" autocomplete="off"/>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" id="username" autocomplete="off" />
           </div>
         </div>
 
@@ -144,13 +186,22 @@
           </div>
         </div>
         <div class="submit">
-          <input type="submit" value="Login" class="login_button" />
+          <input type="submit" value="Login" class="login_button" /><br />
+
+          <div class="separator-container">
+            <hr class="separator-line" />
+            <span class="or-text">or</span>
+            <hr class="separator-line" />
+          </div>
+
+          <span><a class="nav-link signup" href="signup">Sign up for Tech Space</a></span>
         </div>
       </div>
     </form>
+
     <div>
       {% for msg in messages %}
-        <div class="alert alert-info" role="alert" style="text-align: center;">{{ msg }}</div>
+        <div class="alert alert-danger" role="alert" style="text-align: center;">{{ msg }}</div>
       {% endfor %}
     </div>
   </body>

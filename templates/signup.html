@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign-Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-{% comment %}
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@300&display=swap');
-    </style> {% endcomment %}
 
     <style>
       body {
-        font-family : BankGothic Lt BT;
-        background-color: aqua;
+        font-family: BankGothic Lt BT;
+        background-color: #dcf5fe;
       }
-
+      
       .signup {
         width: 50%;
         background: black;
@@ -38,13 +34,16 @@
         position: relative;
         left: 42%;
       }
-
+      
       .signup_button {
-        background-color: cyan;
-        width: 8rem;
+        background-color: #DCF5FE;
+        width: 42rem;
+        position: relative;
         border-radius: 10px;
+        top: -15px;
+        left: -17rem;
       }
-
+      
       .alert {
         position: absolute;
         top: 54%;
@@ -55,19 +54,23 @@
     <style>
       @media (max-width: 480px) {
         .signup {
-          width: 92%;
+           width: 100%;
           background: black;
           position: relative;
-          left: 4%;
-          top: 10%;
-          padding: 3px;
+          left: 0%;
+          top: 0%;
+          padding: 2px;
         }
         .form-control {
           font-size: small;
         }
         .signup_button {
+          margin: auto;
           position: relative;
-          left: -8%;
+          left: -34%;
+          top:5%;
+          width : 84%;
+          border-radius: 10px;
         }
         .signup_text {
           position: relative;
@@ -82,11 +85,10 @@
       }
     </style>
 
-
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var inputElement = document.getElementById('username')
-
+      
         // Add an input event listener
         inputElement.addEventListener('input', function () {
           this.value = this.value.toLowerCase()
@@ -99,7 +101,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Website</a>
+        <a class="navbar-brand" href="#">Create Account</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -116,7 +118,7 @@
         </div>
       </div>
     </nav>
-    <br />
+    
     {% comment %}sign-up form{% endcomment %}
     <form action="signup" method="post">
       {% csrf_token %}
@@ -130,13 +132,13 @@
             <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="first_name" autocomplete="off" />
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="last_name"autocomplete="off" />
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="last_name" autocomplete="off" />
           </div>
         </div>
 
         <div class="row form-row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" id = "username" autocomplete="off"/>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" id="username" autocomplete="off" />
           </div>
         </div>
 
@@ -149,13 +151,13 @@
           </div>
         </div>
         <div class="submit">
-          <h4><input type="submit" value="Sign-Up" class="signup_button" /></h4>
+          <h4><input type="submit" value="Create Account" class="signup_button" /></h4>
         </div>
       </div>
     </form>
     <div>
       {% for msg in messages %}
-      <div class="alert alert-info" role="alert" style="text-align: center;">{{ msg }}</div>
+        <div class="alert alert-info" role="alert" style="text-align: center;">{{ msg }}</div>
       {% endfor %}
     </div>
   </body>

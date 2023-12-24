@@ -54,7 +54,7 @@
               }
             }
           })
-        }, 100)
+        }, 300)
       })
     </script>
 
@@ -82,7 +82,7 @@
     <style>
       body {
         font-family: BankGothic Lt BT;
-        background-color: aqua;
+        background-color: #dcf5fe;
       }
       #message_div {
         overflow: scroll;
@@ -100,13 +100,13 @@
         border-radius: 10px;
       }
       .msg_box {
-        width: 87%;
+        width: 85%;
         border-radius: 7px;
-        background: cyan;
+        background-color: #dcf5fe;
         font-size: 1.3rem;
       }
       .send_button {
-        background-color: cyan;
+        background-color: #dcf5fe;
         width: 6rem;
         margin: auto;
         left: 39%;
@@ -134,11 +134,11 @@
         .msg_box {
           width: 74%;
           border-radius: 7px;
-          background: cyan;
+          background-color: #dcf5fe;
           font-size: 6vw;
         }
         .send_button {
-          background-color: cyan;
+          background-color: #dcf5fe;
           width: 20vw;
           margin: auto;
           left: 39%;
@@ -161,9 +161,11 @@
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             {% if user.is_authenticated %}
+             {% if user.is_staff %}
               <li class="nav-item">
                 <a class="nav-link" href="/Chat/reset_chat">Reset Chat</a>
               </li>
+            {% endif%}
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="/Friends/friend">Friends</a>

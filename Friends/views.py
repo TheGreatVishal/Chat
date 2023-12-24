@@ -1,8 +1,31 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from . import friends_lib as fl
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
+
+def get_users(request):
+
+    db = fl.Database()
+    username = (request.GET["username"])
+
+    all_user_list = []
+    final_list = []
+    
+    all_user_list = db.all_users()
+    db.close()
+    
+    
+    for user in all_user_list:
+        if(username != ""):
+            if(username == user[0:len(username)]):
+                final_list.append(user)
+        else:
+            break
+    
+    
+    return JsonResponse({"user_list" : final_list})
 
 def friend(request):
     
